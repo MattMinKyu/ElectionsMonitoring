@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<meta charset="UTF-8" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+			<meta name="description" content="">
+			<meta name="author" content="">
+			
+			<title>로그인</title>
+    <!-- Custom fonts for this template-->
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+</head>
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4"> 2022 지방선거 모니터링 시스템 </h1>
+                                    </div>
+                                    <form class="user">
+										<div class="radio">
+											<label>
+											  <input type="radio" name="optionsRadios" id="optionsRadios1" value="user1">
+											  동훈선배
+											</label>
+										</div>
+
+										<div class="radio">
+											<label>
+											  <input type="radio" name="optionsRadios" id="optionsRadios2" value="user2">
+											  은영선배
+											</label>
+										</div>
+
+										<div class="radio">
+											<label>
+											  <input type="radio" name="optionsRadios" id="optionsRadios3" value="user3">
+											  해석선배
+											</label>
+										</div>
+
+										<div class="radio">
+											<label>
+											  <input type="radio" name="optionsRadios" id="optionsRadios4" value="user4">
+											  명희선배
+											</label>
+										</div>
+
+										<div class="radio">
+											<label>
+											  <input type="radio" name="optionsRadios" id="optionsRadios5" value="user5">
+											  진주선배
+											</label>
+										</div>
+
+										<div class="radio">
+											<label>
+											  <input type="radio" name="optionsRadios" id="optionsRadios6" value="dev">
+											  개발
+											</label>
+										</div>
+
+										<div class="radio">
+											<label>
+											  <input type="radio" name="optionsRadios" id="optionsRadios7" value="prod">
+											  운영
+											</label>
+										</div>
+										<!--
+                                        <a href="" id="loginBtn" class="btn btn-primary btn-user btn-block">
+                                            Login
+                                        </a>
+										-->
+                                    </form>
+                                    <hr>
+									<input type="button" id="loginBtn" class="btn btn-primary btn-user btn-block" value="로그인">
+									</br>
+									</br>
+									<div class="text-right">
+										@author : mattmk
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    
+    <!-- Core plugin JavaScript-->
+	<script type="text/javascript" th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+	
+	<!-- ytn js file -->
+	<!--
+	<script src="/js/ytn.leftMenu.js" async></script>
+	<script src="/js/ytn.sg.min.js" async></script>
+	<script src="/js/ytn.header.js" async></script>
+	<script src="/js/ytn.footer.js" async></script>
+	<script src="/js/ytn.logout.js" async></script>
+	-->
+
+	<!-- Custom scripts for all pages-->
+	<script type="text/javascript" th:src="@{/js/sb-admin-2.min.js}"></script>
+	
+	<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet">
+	<!-- Custom styles for this template-->
+	<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+	<!--
+		<style>
+			.bg-login-image{background:url(https://source.unsplash.com/K4mSJ7kc0As/600x800)};
+		</style>
+	-->
+
+	<script th:inline="javascript">
+		$("#loginBtn").click(function(){
+			if($(":input:radio[name=optionsRadios]:checked").length == 0){
+				alert('계정을 선택해 주세요.');
+				 return false;
+			}
+
+			$.ajax({
+				url: "/ytn/researchInstutute/elections/member/login",
+				data: { userSelect: $(":input:radio[name=optionsRadios]:checked").val()},
+				dataType:"text",
+				method: "GET",
+				success : function(data) {
+					console.log('data ====> ', data);
+					if(data){
+						location.replace("/ytn/researchInstutute/elections/views/index");
+					}
+				},
+				error : function(xhr, status, errorThrown){
+					console.log("오류명: " + errorThrown);
+					console.log("상태: " + status);
+				}
+			});
+		});
+
+	</script>
+</body>
+
+</html>

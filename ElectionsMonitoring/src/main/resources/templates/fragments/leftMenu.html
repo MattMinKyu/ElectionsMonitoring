@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<th:block th:fragment="leftMenuFragment">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<meta charset="UTF-8" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+			<meta name="description" content="">
+			<meta name="author" content="">
+			
+			<title>leftMenu</title>
+		</head>
+
+		<!-- Sidebar -->
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+			<!-- Sidebar - Brand -->
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
+				<div class="sidebar-brand-text mx-1">지선 모니터링<sup>기술연구소</sup></div>
+			</a>
+
+			<!-- 모니터링 -->
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFirstData" aria-expanded="false" aria-controls="collapseFirstData">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>모니터링</span>
+                </a>
+
+				<div id="collapseFirstData" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" id="menu_firstData" href="/ytn/researchInstutute/elections/views/firstData">첫데이터</a>
+						<a class="collapse-item" id="testData" href="firstData">TEST</a>
+						<a class="collapse-item" id="testData2" href="firstData">TEST2</a>
+						<a class="collapse-item" id="testData3" href="firstData">TEST3</a>
+					</div>
+				</div>
+			</li>
+
+			<!-- TEST TAB -->
+			<!--
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTestTabData" aria-expanded="false" aria-controls="collapseTestTabData">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>TEST TAB</span>
+                </a>
+
+				<div id="collapseTestTabData" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" id="mktest1" href="firstData">MKTEST1<</a>
+						<a class="collapse-item" id="mktest2" href="firstData">MKTEST2</a>
+						<a class="collapse-item" id="mktest3" href="firstData">MKTEST3</a>
+						<a class="collapse-item" id="mktest4" href="firstData">MKTEST4</a>
+					</div>
+				</div>
+			</li>
+			-->
+
+			<!-- TEST TAB2 -->
+			<!--
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTestTabData2" aria-expanded="false" aria-controls="collapseTestTabData2">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>TEST TAB</span>
+                </a>
+
+				<div id="collapseTestTabData2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" id="mktest11" href="firstData">MKTEST1<</a>
+						<a class="collapse-item" id="mktest22" href="firstData">MKTEST2</a>
+						<a class="collapse-item" id="mktest33" href="firstData">MKTEST3</a>
+						<a class="collapse-item" id="mktest44" href="firstData">MKTEST4</a>
+					</div>
+				</div>
+			</li>
+			-->
+			
+			<!-- Sidebar Toggler (Sidebar) -->
+			<div class="text-center d-none d-md-inline">
+				<button class="rounded-circle border-0" id="sidebarToggle"></button>
+			</div>
+
+		</ul>
+		<!-- End of Sidebar -->
+	</th:block>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<meta charset="UTF-8" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+			<meta name="description" content="">
+			<meta name="author" content="">
+			
+			<title>지방선거 모니터링 [기술연구소]</title>
+    <!-- Custom fonts for this template-->
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+		<!-- leftMenu -->
+		<th:block th:replace="fragments/leftMenu :: leftMenuFragment"></th:block> 
+        
+	        <!-- Content Wrapper -->
+	        <div id="content-wrapper" class="d-flex flex-column">
+	
+	            <!-- Main Content -->
+	            <div id="content">
+	            	<!-- header -->
+					<th:block th:replace="fragments/header :: headerFragment"></th:block>
+					<!-- <div id="header"></div> -->
+	
+	                <!-- Begin Page Content -->
+	                <div class="container-fluid">
+	                    <!-- Page Heading -->
+	                    <h1 class="h3 mb-4 text-gray-800"></h1>
+						<!-- 리스트 -->
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<!-- Page Heading -->
+								<div class="d-sm">
+										<!-- <span>초수 : <input type="text" class="" id="autoSec" style="width:5%; height:5%;"></span> -->
+										<span>초수 :
+											<select name="autoSec" id="autoSec" style="width:5%; height:5%;">
+												<option value="0">0</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5" selected>5</option>
+												<option value="10">10</option>
+												<option value="20">20</option>
+												<option value="30">30</option>
+												<option value="40">40</option>
+												<option value="50">50</option>
+												<option value="60">60</option>
+												<option value="120">120</option>
+												<option value="180">180</option>
+												<option value="240">240</option>
+												<option value="300">300</option>
+											</select>
+										</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<span>카운트 : <input type="text" class="" id="autoCnt" style="width:5%; height:5%;" disabled></span>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox" id="autoSelect" th:onclick="autoChkClick()">
+										<label class="form-check-label" for="autoSelect">자동조회</label>
+									</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox" id="soundSelect" th:onclick="autoSoundOffChkClick()">
+										<label class="form-check-label" for="soundSelect">Sound Off</label>
+									  </div>
+									  &nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="#" class="btn btn-success btn-icon-split" th:onclick="searchClick()">
+											<!--
+											<span class="icon text-white-50">
+												<i class="fas fa-check"></i>
+											</span>
+											-->
+											<span class="text">조회</span>
+										</a>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="firstDataTable" class="table table-striped table-bordered table-hover" >
+										<thead>
+											<tr>
+												<th>No</th>
+												<th>지역</th>
+												<th>subSgId</th>
+												<th>sdid</th>
+												<th>wiwid</th>
+												<th>sggid</th>
+												<th>cnt</th>
+											</tr>
+										</thead>
+										<!-- tbody 태그 필요 없다. -->
+									</table>
+								</div>
+							</div>
+						</div>
+	                </div>
+	                <!-- /.container-fluid -->
+	            </div>
+	            <!-- End of Main Content -->
+				<!-- footer -->
+				<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+	        </div>
+	        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+	
+	<!-- logout -->
+	<th:block th:replace="fragments/logout :: logoutFragment"></th:block>
+	
+    <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery.cookie.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script type="text/javascript" th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+	<script type="text/javascript" th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+    
+    <!-- Core plugin JavaScript-->
+	<script type="text/javascript" th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+	
+	<!-- ytn js file -->
+	<script type="text/javascript" th:src="@{/js/ytn.util.js}"></script>
+	<!--
+	<script src="/js/ytn.leftMenu.js" async></script>
+	<script src="/js/ytn.sg.min.js" async></script>
+	<script src="/js/ytn.header.js" async></script>
+	<script src="/js/ytn.footer.js" async></script>
+	<script src="/js/ytn.logout.js" async></script>
+	-->
+
+	<!-- Custom scripts for all pages-->
+	<script type="text/javascript" th:src="@{/js/sb-admin-2.min.js}"></script>
+
+	<link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet">
+	<!-- Custom styles for this template-->
+	<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+	<!-- Custom styles for this page -->
+	<link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+
+	<script th:inline="javascript">
+	var targetPath = [[${session.loginUserId}]];
+	var autoSelectorTimer;
+	var autoSoundTimer;
+	var callCnt=0;
+	
+	/**
+	 * Get Data Ajax.
+	 * @author : mattmk
+	*/
+	function getDataAjax(){
+		var table = $('#firstDataTable').dataTable({
+			//반응형 설정
+			responsive: true,
+			//검색란
+			searching: false,
+			//페이지 당 글 개수 설정
+			pageLength: 50,
+			//페이징 표시 설정
+			paging: true,
+			bPaginate: true,
+			//show entries
+			bLengthChange: true,
+			lengthMenu : [ [ 10, 30, 50, 100], [ 10, 30, 50, 100]],
+			bAutoWidth: false,
+			processing: true,
+			//글 순서 설정
+			ordering: true,
+			bServerSide: true,
+			/*
+			ajax : {
+				"type"   : "GET",
+				"url"    : "/ytn/researchInstutute/elections/data/"+targetPath+"/getList",
+				"dataSrc": function (json) {
+					console.log('json ====> ', json);
+					var return_data = new Array();
+					for(var i=0;i< json.length; i++){
+						console.log('json[i].area ===>', json[i].area);
+						console.log('json[i].subSgId ===>', json[i].subSgId);
+
+						return_data.push({
+							'area': json[i].area,
+							'subSgId': json[i].subSgId,
+							'sdid': json[i].sdid,
+							'wiwid': json[i].wiwid,
+							'sggid': json[i].sggid,
+							'cnt': json[i].cnt
+						})
+
+						console.log('return_data ====> ', return_data);
+					}
+					return return_data;
+					}
+				},
+				columns : [
+					{data: "area"},
+					{data: "subSgId"},
+					{data: "sdid"},
+					{data: "wiwid"},
+					{data: "sggid"},
+					{data: "cnt"}
+				]
+				*/
+
+			sAjaxSource : "/ytn/researchInstutute/elections/data/"+targetPath+"/firstData/getList",
+			sServerMethod: "POST",
+			columns : [
+				{data: "rowIdx"},
+				{data: "area"},
+				{data: "subSgId"},
+				{data: "sdid"},
+				{data: "wiwid"},
+				{data: "sggid"},
+				{data: "cnt"}
+			],
+			"columnDefs":[
+				{
+					"targets":[0],
+					"searchable":false,
+					"orderable": false
+				}
+			]
+		});
+	}
+
+	/**
+	 * 조회 버튼.
+	 * @author : mattmk
+	*/
+	function searchClick(){
+		if($('tbody').length == 0){
+			getDataAjax();
+			//경고음 sound play
+			if(!$('#soundSelect').is(':checked')){
+				autoSoundOn();
+			}
+		}else{
+			var table = $('#firstDataTable').DataTable();
+			table.ajax.reload();
+
+			//경고음 sound play
+			if(!$('#soundSelect').is(':checked')){
+				autoSoundOn();
+			}
+		}
+	}
+
+	/**
+	 * 자동조회 체크.
+	 * @author : mattmk
+	*/
+	function autoChkClick(){
+		if($('#autoSelect').is(':checked')){
+			autoSelectorTimer = setInterval(function(){
+				console.log($('#autoSec').val()+"초 시간마다 계속 실행됩니다.");
+				searchClick();
+				callCnt++;
+				console.log('callCnt', callCnt);
+				$('#autoCnt').val(callCnt);
+			}, $('#autoSec').val()*1000);
+		}else{
+			clearInterval(autoSelectorTimer);
+			callCnt = 0;
+			$('#autoCnt').val(callCnt);
+		}
+	}
+
+	/**
+	 * select 선택시, 타이머 초기화.
+	 * @author : mattmk
+	*/
+	$('#autoSec').change(function(){
+		callCnt=0;
+		clearInterval(autoSelectorTimer);
+
+		autoChkClick();
+	});
+
+	/**
+	 * 경고음 sound play.
+	 * @author : mattmk
+	*/
+	function autoSoundOn(){
+		setTimeout(function(){
+			var table = $('#firstDataTable').DataTable();
+
+			console.log('[this] table.data().length', table.data().length);
+			if(table.data().length>0){
+				var audio = new Audio();
+				audio.src = "/audio/SOUND36.WAV";
+				audio.play();
+			}
+		}, 2000);
+		
+		
+		/*
+		// 초기화
+		clearInterval(autoSoundTimer);
+		var audio = new Audio();
+
+		autoSoundTimer = setInterval(function(){
+			audio.src = "/audio/SOUND36.WAV";
+		audio.play();
+		},2000);
+		*/
+	};
+
+	/**
+	 * 자동음악 재생 체크.
+	 * @author : mattmk
+	*/
+	function autoSoundOffChkClick(){
+		if($('#soundSelect').is(':checked')){
+			clearInterval(autoSoundTimer);
+		}
+	}
+
+	/*
+	var callCnt=0;
+	 setInterval(function(){
+		console.log("2초 시간마다 계속 실행됩니다.");
+		var table = $('#firstDataTable').DataTable();
+		table.ajax.reload();
+		callCnt++;
+		console.log('callCnt', callCnt);
+	}, 2000 );
+
+	table.data().length;
+
+
+	var audio = new Audio();
+	audio.src = "/audio/SOUND36.WAV";
+	audio.play();
+
+	*/
+	</script>
+</body>
+
+</html>
